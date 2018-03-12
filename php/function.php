@@ -345,7 +345,7 @@ function isIos()
  * 判断是否为微信内置浏览器打开
  * @return bool
  */
-function isWechet()
+function isWechat()
 {
     if (isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
         return true;

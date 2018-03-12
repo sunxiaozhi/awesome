@@ -6,9 +6,7 @@
  * Time: 15:17
  */
 
-//--------------------
-// 基本数据结构算法
-//--------------------
+/****************************************基本数据结构算法****************************************/
 //二分查找（数组里查找某个元素）
 function bin_sch($array, $low, $high, $k)
 {
@@ -52,44 +50,7 @@ function delete_array_element($array, $i)
     return $array;
 }
 
-//冒泡排序（数组排序）
-function bubble_sort($array)
-{
-    $count = count($array);
-    if ($count <= 0) return false;
-    for ($i = 0; $i < $count; $i++) {
-        for ($j = $count - 1; $j > $i; $j--) {
-            if ($array[$j] < $array [$j - 1]) {
-                $tmp = $array[$j];
-                $array[$j] = $array[$j - 1];
-                $array [$j - 1] = $tmp;
-            }
-        }
-    }
-    return $array;
-}
-
-//快速排序（数组排序）
-function quick_sort($array)
-{
-    if (count($array) <= 1) return $array;
-    $key = $array [0];
-    $left_arr = array();
-    $right_arr = array();
-    for ($i = 1; $i < count($array); $i++) {
-        if ($array[$i] <= $key)
-            $left_arr [] = $array[$i];
-        else
-            $right_arr[] = $array[$i];
-    }
-    $left_arr = quick_sort($left_arr);
-    $right_arr = quick_sort($right_arr);
-    return array_merge($left_arr, array($key), $right_arr);
-}
-
-//------------------------
-// PHP内置字符串函数实现
-//------------------------
+/****************************************PHP内置字符串函数实现****************************************/
 //字符串长度
 function strlen($str)
 {
@@ -173,9 +134,7 @@ function strstr($str, $substr)
     return false;
 }
 
-//--------------------
-// 自实现字符串处理函数
-//--------------------
+/****************************************自实现字符串处理函数****************************************/
 //插入一段字符串
 function str_insert($str, $i, $substr)
 {
@@ -265,64 +224,4 @@ function php_decrypt($str)
     }
     return $enstr;
 }
-
-/*学用php算法*/
-/*1、冒泡法
-    *思路分析：在要排序的一组数中，对当前还未排好的序列，
-    *从前往后对相邻的两个数依次进行比较和调整，让较大的数往下沉，较小的往上冒。
-    *即，每当两相邻的数比较后发现它们的排序与排序要求相反时，就将它们互换。
-    *比如：
-    *第一次循环:第一步(1:43)第二步(43:54)第三步(54:62)第四步(62:21)这时则死换变成了(21:62)........(76:39)
-    *第二次循环:第一步(1:43)第二步(43:54)第三步(54:62)第四步(62:21)这时则死换变成了(21:62)........(36:76)
-
-*/
-
-$arr = array(1, 43, 54, 62, 21, 66, 32, 78, 36, 76, 39);
-function bubbleSort($arr)
-{
-    $len = count($arr);
-    //该层循环控制 需要冒泡的轮数
-    for ($i = 1; $i < $len; $i++) { //该层循环用来控制每轮 冒出一个数 需要比较的次数
-        for ($k = 0; $k < $len - $i; $k++) {
-            if ($arr[$k] > $arr[$k + 1]) {
-                $tmp = $arr[$k + 1];
-                $arr[$k + 1] = $arr[$k];
-                $arr[$k] = $tmp;
-            }
-        }
-    }
-    return $arr;
-}
-
-
-/*2.选择排序
-    *思路分析：在要排序的一组数中，选出最小的一个数与第一个位置的数交换。
-    *然后在剩下的数当中再找最小的与第二个位置的数交换，如此循环到倒数第二个数和最后一个数比较为止。
-*/
-function selectSort($arr)
-{
-    //双重循环完成，外层控制轮数，内层控制比较次数(7.5.2.9.3)
-    $len = count($arr);
-    for ($i = 0; $i < $len - 1; $i++) {
-        //先假设最小的值的位置
-        $p = $i;
-
-        for ($j = $i + 1; $j < $len; $j++) {
-            //$arr[$p] 是当前已知的最小值
-            if ($arr[$p] > $arr[$j]) {
-                //比较，发现更小的,记录下最小值的位置；并且在下次比较时采用已知的最小值进行比较。
-                $p = $j;
-            }
-        }
-        //已经确定了当前的最小值的位置，保存到$p中。如果发现最小值的位置与当前假设的位置$i不同，则位置互换即可。
-        if ($p != $i) {
-            $tmp = $arr[$p];
-            $arr[$p] = $arr[$i];
-            $arr[$i] = $tmp;
-        }
-    }
-    //返回最终结果
-    return $arr;
-}
-
 

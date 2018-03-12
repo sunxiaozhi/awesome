@@ -71,7 +71,7 @@ function getRandom_two($length = 10)
  * @param $year
  * @return int|string
  */
-function getdaysInmonth($month, $year)
+function getDaysInMonth_one($month, $year)
 {
     $days = '';
     if ($month == 1 || $month == 3 || $month == 5 || $month == 7 || $month == 8 || $month == 10 || $month == 12)
@@ -89,11 +89,38 @@ function getdaysInmonth($month, $year)
 }
 
 /**
+ * 计算该月有几天
+ * @param $month
+ * @param $year
+ * @return int|string
+ */
+function getDaysInMonth_two($month, $year)
+{
+    $days = '';
+    $month_31 = array(1, 3, 5, 7, 8, 10, 12);
+    $month_30 = array(4, 6, 9, 11);
+
+    if (in_array($month, $month_31)) {
+        $days = 31;
+    } elseif (in_array($month, $month_30)) {
+        $days = 30;
+    } elseif ($month == 2) {
+        if (isLeapYear($year)) {
+            $days = 29;
+        } else {
+            $days = 28;
+        }
+    }
+
+    return ($days);
+}
+
+/**
  * 判断是否为润年
  * @param $year
  * @return bool
  */
-function isLeapyear($year)
+function isLeapYear($year)
 {
     if ((($year % 4) == 0) && (($year % 100) != 0) || (($year % 400) == 0)) {
         return (true);

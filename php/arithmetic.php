@@ -52,7 +52,7 @@ function delete_array_element($array, $i)
 
 /****************************************PHP内置字符串函数实现****************************************/
 //字符串长度
-function strlen($str)
+function strlen_realize($str)
 {
     if ($str == '') return 0;
     $count = 0;
@@ -68,7 +68,7 @@ function strlen($str)
 }
 
 //截取子串
-function substr($str, $start, $length = NULL)
+function substr_realize($str, $start, $length = NULL)
 {
     if ($str == '' || $start > strlen($str)) return '';
     if (($length != NULL) && ($start > 0) && ($length > strlen($str) - $start)) return '';
@@ -96,7 +96,7 @@ function substr($str, $start, $length = NULL)
 }
 
 //字符串翻转
-function strrev($str)
+function strrev_realize($str)
 {
     $rev_str = '';
     if ($str == '') return 0;
@@ -107,7 +107,7 @@ function strrev($str)
 }
 
 //字符串比较
-function strcmp($s1, $s2)
+function strcmp_realize($s1, $s2)
 {
     if (strlen($s1) < strlen($s2)) return -1;
     if (strlen($s1) > strlen($s2)) return 1;
@@ -122,7 +122,7 @@ function strcmp($s1, $s2)
 }
 
 //查找字符串
-function strstr($str, $substr)
+function strstr_realize($str, $substr)
 {
     $m = strlen($str);
     $n = strlen($substr);

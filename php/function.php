@@ -7,36 +7,70 @@
  */
 
 /**
- * 生成随机字符串，可以自己扩展   //若想唯一，只需在开头加上用户id
+ * 生成随机字符串，可以自己扩展 //若想唯一，只需在开头加上用户id
  * @param $type //可以为：upper(只生成大写字母)，lower(只生成小写字母)，number(只生成数字)
  * @param int $len //为长度，定义字符串长度
  * @return string
  */
-function random($type, $len = 0)
+function getRandom_one($type = 'upper', $len = 15)
 {
     $new = '';
     $string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';  //数据池
+
     if ($type == 'upper') {
         for ($i = 0; $i < $len; $i++) {
             $new .= $string[mt_rand(36, 61)];
         }
         return $new;
     }
+
     if ($type == 'lower') {
         for ($i = 0; $i < $len; $i++) {
             $new .= $string[mt_rand(10, 35)];
         }
         return $new;
     }
+
     if ($type == 'number') {
         for ($i = 0; $i < $len; $i++) {
             $new .= $string[mt_rand(0, 9)];
         }
         return $new;
     }
+
+    return $new;
 }
 
-//计算该月有几天
+/**
+ * 生成随机字符串 可进行扩展 全返回大写strtoupper  全返回小写strtolower
+ * @param int $length
+ * @return string
+ */
+function getRandom_two($length = 10)
+{
+    $random_string = '';
+    $string_arr = array_merge(range(0, 9), range('a', 'z'), range('A', 'Z'));  //数据池
+
+    $count = count($string_arr);
+
+    for ($i = 0; $i < $length; $i++) {
+        $rand_num = rand(0, $count - 1);
+        $random_string .= $string_arr[$rand_num];
+    }
+
+    return $random_string;
+
+    //return strtoupper($random_string);  //全部转换为大写
+
+    //return strtolower($random_string);  //全部转换为小写
+}
+
+/**
+ * 计算该月有几天
+ * @param $month
+ * @param $year
+ * @return int|string
+ */
 function getdaysInmonth($month, $year)
 {
     $days = '';
@@ -54,7 +88,11 @@ function getdaysInmonth($month, $year)
     return ($days);
 }
 
-//判断是否为润年
+/**
+ * 判断是否为润年
+ * @param $year
+ * @return bool
+ */
 function isLeapyear($year)
 {
     if ((($year % 4) == 0) && (($year % 100) != 0) || (($year % 400) == 0)) {
@@ -64,10 +102,14 @@ function isLeapyear($year)
     }
 }
 
-//生成订单15位
+/**
+ * 生成订单15位
+ * @param int $ord
+ * @return string
+ */
 function auto_order($ord = 0)
 {
-    //自动生成订单号  传入参数为0 或者1   0为本地  1为线上订单
+    //自动生成订单号 传入参数为0或者1 0为本地 1为线上订单
     if ($ord == 0) {
         $str = '00' . time() . rand(1000, 9999); //00 本地订单
     } else {
@@ -91,8 +133,8 @@ function auto_new_order($ord = 0)
 
 /**
  * 检测是否为UTF8编码
- * @param $string 检测字符串
- * @return bool
+ * @param $string //检测字符串
+ * @return false|int
  */
 function is_utf8($string)
 {
@@ -108,7 +150,12 @@ function is_utf8($string)
     )*$%xs', $string);
 }
 
-//处理json字符中的特殊字符
+/**
+ * 处理json字符中的特殊字符
+ * @param $result
+ * @param bool $return_array
+ * @return mixed|null
+ */
 function getJsonToArr($result, $return_array = true)
 {
     $tempArr = NULL;
@@ -124,15 +171,22 @@ function getJsonToArr($result, $return_array = true)
     return $tempArr;
 }
 
-
-//非法字符过滤函数
+/**
+ * 非法字符过滤函数
+ * @param $str
+ * @return null|string|string[]
+ */
 function has_unsafeword($str)
 {
     $regex = "/\/|\~|\!|\@|\#|\\$|\%|\^|\&|\*|\(|\)|\_|\+|\{|\}|\:|\<|\>|\?|\[|\]|\.|\/|\;|\'|\`|\=|\\\|\|/";
     return preg_replace($regex, "", $str);
 }
 
-//去空格，以及字符添加斜杠
+/**
+ * 去空格，以及字符添加斜杠
+ * @param $value
+ * @return string
+ */
 function _trim(&$value)
 {
     Return addslashes(trim($value));
@@ -140,7 +194,7 @@ function _trim(&$value)
 
 /**
  * 将多维数组转为一维数组
- * @param array $arr
+ * @param $arr //数组
  * @return array
  */
 function ArrMd2Ud($arr)
@@ -232,7 +286,10 @@ function isMobile()
     return false;
 }
 
-//判断是否为安卓手机
+/**
+ * 判断是否为安卓手机
+ * @return bool
+ */
 function isAndroid()
 {
     if (isset($_SERVER['HTTP_USER_AGENT'])) {
@@ -243,7 +300,10 @@ function isAndroid()
     return false;
 }
 
-//判断是否为iphone或者ipad
+/**
+ * 判断是否为iphone 或者ipad
+ * @return bool
+ */
 function isIos()
 {
     if (isset($_SERVER['HTTP_USER_AGENT'])) {
@@ -254,7 +314,10 @@ function isIos()
     return false;
 }
 
-//判断是否为微信内置浏览器打开
+/**
+ * 判断是否为微信内置浏览器打开
+ * @return bool
+ */
 function isWechet()
 {
     if (isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
@@ -263,7 +326,10 @@ function isWechet()
     return false;
 }
 
-//整合到一起，判断当前设备，1：安卓；2：IOS；3：微信；0：未知
+/**
+ * 整合到一起，判断当前设备，1：安卓；2：IOS；3：微信；0：未知
+ * @return int
+ */
 function isDevice()
 {
     if ($_SERVER['HTTP_USER_AGENT']) {
@@ -333,6 +399,11 @@ function formatTime($date)
 
 /**
  * 截取长度
+ * @param $rawString
+ * @param string $length
+ * @param string $etc
+ * @param bool $isStripTag
+ * @return string
  */
 function getSubString($rawString, $length = '100', $etc = '...', $isStripTag = true)
 {
@@ -369,7 +440,7 @@ function getSubString($rawString, $length = '100', $etc = '...', $isStripTag = t
  * utf-8和gb2312自动转化
  * @param $string
  * @param string $outEncoding
- * @return |string
+ * @return string
  */
 function safeEncoding($string, $outEncoding = 'UTF-8')
 {
@@ -408,17 +479,11 @@ function safeEncoding($string, $outEncoding = 'UTF-8')
 }
 
 /**
- *
- *$content:string
- *$keyword:string  关键词
- *$link:string,链接
- */
-/**
  * 对内容中的关键词添加链接
  * 只处理第一次出现的关键词，对已有链接的关键不会再加链接，支持中英文
- * @param $content
- * @param $keyword
- * @param $link
+ * @param $content //内容
+ * @param $keyword //关键词
+ * @param $link //链接
  * @return mixed|null|string|string[]
  */
 function yang_keyword_link($content, $keyword, $link)

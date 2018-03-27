@@ -8,7 +8,7 @@
 * automake
 
 ```bash
-yum install gcc gcc-c++ autoconf automake
+yum -y install gcc gcc-c++ autoconf automake
 ```
 
 安装一些专用的库：
@@ -20,7 +20,7 @@ yum install gcc gcc-c++ autoconf automake
 * ssl功能：openssl库
 
 ```bash
-yum install zlib zlib-devel pcre pcre-devel openssl openssl-devel
+yum -y install zlib zlib-devel pcre pcre-devel openssl openssl-devel
 ```
 
 ## 二、安装Nginx
@@ -48,9 +48,7 @@ cd nginx-1.12.2
 
 ```
 注释：
-
 开启ssl模块 --with-http_ssl_module
-
 启用“server+status"页，--with-http_stub_status_module
 ```
 

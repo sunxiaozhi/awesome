@@ -77,7 +77,7 @@ export PATH=$PATH:$NGINX_HOME/sbin
 >使用export设置环境变量之后，重启机器会失效，因此写入/etc/profile。
 
 ```bash
-echo "alias nginx='/home/web/nginx/sbin/nginx'" >> /etc/profile
+echo "alias nginx='/usr/local/nginx/sbin/nginx'" >> /etc/profile
 ```
 保存，执行 source /etc/profile ，使配置文件生效。执行nginx -v,就能看到版本了，说明nginx 安装成功了。
 

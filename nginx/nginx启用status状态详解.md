@@ -18,8 +18,11 @@ nginx有一个统计功能模块，编译安装的时候加上参数 "--with-htt
 在server块下面加上如下配置：
 
 ```bash
-#性能统计 add@2017-12-13
+#性能统计 add@2018-3-28
 location /nginx_status{
+    allow --------//允许的ip
+    allow --------//允许的ip
+    deny all;     //拒绝所有
     stub_status  on;
     access_log   off;
 }
@@ -35,11 +38,20 @@ location /nginx_status{
 
 5）在浏览器中输入 "域名/nginx_status" 就会显示nginx上次启动以来工作状态的统计的结果。
 
+```bash
+Active connections: 2 
+server accepts handled requests
+ 13057 13057 11634 2230854
+Reading: 0 Writing: 1 Waiting: 1 
+```
+
 6）返回各数据项说明：
 
 Active connections: 当前nginx正在处理的活动连接数.
 
-Server accepts handled requests request_time: nginx总共处理了13057 个连接,成功创建13057 握手(证明中间没有失败的),总共处理了11634 个请求,总共请求时间2230854。
+Server accepts handled requests:
+
+nginx总共处理了13057 个连接,成功创建13057 握手(证明中间没有失败的),总共处理了11634 个请求。
 
 Reading: nginx读取到客户端的Header信息数。
 

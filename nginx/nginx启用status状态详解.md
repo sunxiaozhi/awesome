@@ -41,7 +41,7 @@ location /nginx_status{
 ```bash
 Active connections: 2 
 server accepts handled requests
- 13057 13057 11634 2230854
+ 13057 13057 11634
 Reading: 0 Writing: 1 Waiting: 1 
 ```
 

@@ -47,3 +47,8 @@ cp sapi/fpm/init.d.php-fpm /etc/rc.d/init.d/php-fpm
 chmod 755 /etc/rc.d/init.d/php-fpm
 chkconfig php-fpm on
 ```
+
+添加链接
+```bash
+ln -sf /usr/local/php/sbin/php-fpm /usr/bin/php-fpm
+```

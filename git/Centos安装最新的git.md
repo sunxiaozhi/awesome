@@ -13,7 +13,7 @@ yum -y install  gcc perl-ExtUtils-MakeMaker
 
 3、卸载低版本的 Git
 
-通过命令：git –-version 查看系统带的版本，Git 版本是：1.8.3.1，所以先要卸载低版本的 Git，命令：
+通过命令：git --version 查看系统带的版本，Git 版本是：1.8.3.1，所以先要卸载低版本的 Git，命令：
 ```bash
 yum remove git
 ```

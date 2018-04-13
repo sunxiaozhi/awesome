@@ -13,7 +13,7 @@ error_log  logs/error.log  info;
 #错误日志：存放路径。
 
 pid logs/nginx.pid;
-pid（进程标识符）：存放路径。
+#pid（进程标识符）：存放路径。
 
 worker_rlimit_nofile 204800;
 #指定进程可以打开的最大描述符：数目。
@@ -95,11 +95,11 @@ http
     open_file_cache max=102400 inactive=20s;
     #这个指令指定缓存是否启用。
     例: open_file_cache max=1000 inactive=20s;
+    
     open_file_cache_valid 30s;
     open_file_cache_min_uses 2;
+    
     open_file_cache_errors on;
-
-    open_file_cache_errors
     #语法:open_file_cache_errors on | off 默认值:open_file_cache_errors off 使用字段:http, server, location 这个指令指定是否在搜索一个文件是记录cache错误.
 
     open_file_cache_min_uses
@@ -162,60 +162,66 @@ http
         hash $request_uri;
     }
 
-    nginx的upstream目前支持4种方式的分配
-    1、轮询（默认）
-    每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。
-    2、weight
-    指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。
-    例如：
-    upstream bakend {
-    server 192.168.0.14 weight=10;
-    server 192.168.0.15 weight=10;
-    }
-    2、ip_hash
-    每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。
-    例如：
-    upstream bakend {
-    ip_hash;
-    server 192.168.0.14:88;
-    server 192.168.0.15:80;
-    }
-    3、fair（第三方）
-    按后端服务器的响应时间来分配请求，响应时间短的优先分配。
-    upstream backend {
-    server server1;
-    server server2;
-    fair;
-    }
-    4、url_hash（第三方）
-    按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。
-    例：在upstream中加入hash语句，server语句中不能写入weight等其他的参数，hash_method是使用的hash算法
-    upstream backend {
-    server squid1:3128;
-    server squid2:3128;
-    hash $request_uri;
-    hash_method crc32;
-    }
-    tips:
-    upstream bakend{#定义负载均衡设备的Ip及设备状态}{
-    ip_hash;
-    server 127.0.0.1:9090 down;
-    server 127.0.0.1:8080 weight=2;
-    server 127.0.0.1:6060;
-    server 127.0.0.1:7070 backup;
-    }
-    在需要使用负载均衡的server中增加
-    proxy_pass http://bakend/;
-    每个设备的状态设置为:
-    1.down表示单前的server暂时不参与负载
-    2.weight为weight越大，负载的权重就越大。
-    3.max_fails：允许请求失败的次数默认为1.当超过最大次数时，返回proxy_next_upstream模块定义的错误
-    4.fail_timeout:max_fails次失败后，暂停的时间。
-    5.backup： 其它所有的非backup机器down或者忙的时候，请求backup机器。所以这台机器压力会最轻。
-    nginx支持同时设置多组的负载均衡，用来给不用的server来使用。
-    client_body_in_file_only设置为On 可以讲client post过来的数据记录到文件中用来做debug
-    client_body_temp_path设置记录文件的目录 可以设置最多3层目录
-    location对URL进行匹配.可以进行重定向或者进行新的代理 负载均衡
+    #nginx的upstream目前支持4种方式的分配
+    #1、轮询（默认）
+    #每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。
+    #2、weight
+    #指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。
+    #例如：
+    #    upstream bakend {
+    #        server 192.168.0.14 weight=10;
+    #        server 192.168.0.15 weight=10;
+    #    }
+    #2、ip_hash
+    #每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。
+    #例#如：
+    #    upstream bakend {
+    #        ip_hash;
+    #        server 192.168.0.14:88;
+    #        server 192.168.0.15:80;
+    #    }
+    #3、fair（第三方）
+    #按后端服务器的响应时间来分配请求，响应时间短的优先分配。
+    #    upstream backend {
+    #        server server1;
+    #        server server2;
+    #        fair;
+    #    }
+    #4、url_hash（第三方）
+    #按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。
+    #例：在upstream中加入hash语句，server语句中不能写入weight等其他的参数，hash_method是使用的hash算法
+    #    upstream backend {
+    #        server squid1:3128;
+    #        server squid2:3128;
+    #        hash $request_uri;
+    #        hash_method crc32;
+    #    }
+    
+    #tips:
+    
+    #    upstream bakend{#定义负载均衡设备的Ip及设备状态}{
+    #        ip_hash;
+    #        server 127.0.0.1:9090 down;
+    #        server 127.0.0.1:8080 weight=2;
+    #        server 127.0.0.1:6060;
+    #        server 127.0.0.1:7070 backup;
+    #    }
+    
+    #在需要使用负载均衡的server中增加
+    
+    #proxy_pass http://bakend/;
+    
+    #每个设备的状态设置为:
+    #1.down表示单前的server暂时不参与负载
+    #2.weight为weight越大，负载的权重就越大。
+    #3.max_fails：允许请求失败的次数默认为1.当超过最大次数时，返回proxy_next_upstream模块定义的错误
+    #4.fail_timeout:max_fails次失败后，暂停的时间。
+    #5.backup： 其它所有的非backup机器down或者忙的时候，请求backup机器。所以这台机器压力会最轻。
+    #nginx支持同时设置多组的负载均衡，用来给不用的server来使用。
+    
+    #client_body_in_file_only设置为On 可以将client post过来的数据记录到文件中用来做debug
+    #client_body_temp_path设置记录文件的目录 可以设置最多3层目录
+    #location对URL进行匹配.可以进行重定向或者进行新的代理 负载均衡
 
     ##配置虚拟机
     server {
@@ -390,34 +396,33 @@ http
     #禁止访问.htxxx文件
 }
 
-注释：变量
-Ngx_http_core_module模块支持内置变量，他们的名字和apache的内置变量是一致的。
-首先是说明客户请求title中的行，例如$http_user_agent,$http_cookie等等。
-此外还有其它的一些变量
-$args此变量与请求行中的参数相等
-$content_length等于请求行的“Content_Length”的值。
-$content_type等同与请求头部的”Content_Type”的值
-$document_root等同于当前请求的root指令指定的值
-$document_uri与$uri一样
-$host与请求头部中“Host”行指定的值或是request到达的server的名字（没有Host行）一样
-$limit_rate允许限制的连接速率
-$request_method等同于request的method，通常是“GET”或“POST”
-$remote_addr客户端ip
-$remote_port客户端port
-$remote_user等同于用户名，由ngx_http_auth_basic_module认证
-$request_filename当前请求的文件的路径名，由root或alias和URI request组合而成
-$request_body_file
-$request_uri含有参数的完整的初始URI
-$query_string与$args一样
-$sheeme http模式（http,https）尽在要求是评估例如
-Rewrite ^(.+)$ $sheme://example.com$; Redirect;
-$server_protocol等同于request的协议，使用“HTTP/或“HTTP/
-$server_addr request到达的server的ip，一般获得此变量的值的目的是进行系统调用。为了避免系统调用，有必要在listen指令中指明ip，并使用bind参数。
-$server_name请求到达的服务器名
-$server_port请求到达的服务器的端口号
-$uri等同于当前request中的URI，可不同于初始值，例如内部重定向时或使用index
+#注释：变量
+#Ngx_http_core_module模块支持内置变量，他们的名字和apache的内置变量是一致的。
+#首先是说明客户请求title中的行，例如$http_user_agent,$http_cookie等等。
+#此外还有其它的一些变量
+#$args此变量与请求行中的参数相等
+#$content_length等于请求行的“Content_Length”的值。
+#$content_type等同与请求头部的”Content_Type”的值
+#$document_root等同于当前请求的root指令指定的值
+#$document_uri与$uri一样
+#$host与请求头部中“Host”行指定的值或是request到达的server的名字（没有Host行）一样
+#$limit_rate允许限制的连接速率
+#$request_method等同于request的method，通常是“GET”或“POST”
+#$remote_addr客户端ip
+#$remote_port客户端port
+#$remote_user等同于用户名，由ngx_http_auth_basic_module认证
+#$request_filename当前请求的文件的路径名，由root或alias和URI request组合而成
+#$request_body_file
+#$request_uri含有参数的完整的初始URI
+#$query_string与$args一样
+#$sheeme http模式（http,https）尽在要求是评估例如
+#Rewrite ^(.+)$ $sheme://example.com$; Redirect;
+#$server_protocol等同于request的协议，使用“HTTP/或“HTTP/
+#$server_addr request到达的server的ip，一般获得此变量的值的目的是进行系统调用。为了避免系统调用，有必要在listen指令中指明ip，并使用bind参数。
+#$server_name请求到达的服务器名
+#$server_port请求到达的服务器的端口号
+#$uri等同于当前request中的URI，可不同于初始值，例如内部重定向时或使用index
 ```
-
 
 ```bash
 
@@ -535,6 +540,5 @@ http {
     #        index  index.html index.htm;
     #    }
     #}
-
 }
 ```

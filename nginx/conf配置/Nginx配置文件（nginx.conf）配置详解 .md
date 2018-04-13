@@ -362,6 +362,7 @@ http
             rewrite ^(.*)$ http://www.***.com/ ;
         }
     }
+    
     server {
         listen 80;
         server_name *******.com w.*******.com;

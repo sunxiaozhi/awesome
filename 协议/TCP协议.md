@@ -1,6 +1,6 @@
 建立TCP需要三次握手才能建立，而断开连接则需要四次挥手。整个过程如下图所示：
 
-![](cover.jpg)
+![](https://github.com/sunxiaozhi/awesome/blob/master/image/tcp/1271823564Rx.gif)
 
 先来看看如何建立连接的。
 

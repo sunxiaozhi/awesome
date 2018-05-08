@@ -15,21 +15,13 @@ $urls = array(
     '9' => "http://www.lfxww.com/plus/view.php?aid=336872 ",
     '12' => "http://www.lfxww.com/plus/view.php?aid=336874 ",
     '67' => "http://www.zznews.cn/hyzx/jkxx/4160443738.html ",
-    '34' => "hhttp://www.leshan.cn/hyzx/jkxx/4160562511.html ");
+    '34' => "hhttp://www.leshan.cn/hyzx/jkxx/4160562511.html "
+);
 
 //百度查搜录地址
 $baidu = 'http://www.baidu.com/s?wd={url}&rsv_bp=0&ch=&tn=baidu&bar=&rsv_spt=3&ie=utf-8&rsv_n=2&rsv_sug3=1&rsv_sug1=1&rsv_sug4=2822&inputT=7012';
 //替换成百度查询链接
 array_walk($urls, create_function('&$v,$k,$baidu', '$v = str_replace("{url}", urlencode($v), $baidu);'), $baidu);
-
-/**
- * 下面有两种方式处理，一种是通过回调，传入$callback，在$callback中处理,可控制返回结果
- * 还有种是获取返回结果集中处理
- * 推荐第一种
- */
-$result = curl_multi($urls, null, 'deal');
-print_r($result);
-exit();
 
 /**
  * 返回结果，id=>收录日期,0表示未收录
@@ -103,3 +95,7 @@ function deal(&$data)
     preg_match('#<span class="g">.*(\d{4}-\d{1,2}-\d{1,2})#is', $content, $match);
     $data = isset($match[1]) ? $match[1] : 0;
 }
+
+$result = curl_multi($urls, null, 'deal');
+print_r($result);
+

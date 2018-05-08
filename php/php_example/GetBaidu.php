@@ -7,7 +7,7 @@
  * Time: 10:48
  */
 
-class getBaidu
+class GetBaidu
 {
     public $urls;
 
@@ -25,7 +25,6 @@ class getBaidu
      */
     public function getData() {
         $this->operateUrls();
-        print_r($this->urls);exit;
         return $this->curl_multi($this->urls, null, 'deal');
     }
 
@@ -46,7 +45,7 @@ class getBaidu
      * @param null $callback
      * @return array
      */
-    function curl_multi($urls = array(), $head_req = null, $callback = null)
+    private function curl_multi($urls = array(), $head_req = null, $callback = null)
     {
         $response = array();
         if (empty($urls)) {
@@ -73,22 +72,28 @@ class getBaidu
 
         do {
             if (($status = curl_multi_exec($chs, $active)) != CURLM_CALL_MULTI_PERFORM) {
+
                 if ($status != CURLM_OK) {
                     break;
                 } //如果没有准备就绪，就再次调用curl_multi_exec
+
                 while ($done = curl_multi_info_read($chs)) {
                     $info = curl_getinfo($done['handle']);
                     $error = curl_error($done['handle']);
+
                     if (!isset($head_req)) {
                         $result = curl_multi_getcontent($done['handle']);
                         $rtn = compact('info', 'error', 'result');
                     } else {
                         $rtn = compact('info', 'error');
                     }
+
                     isset($callback) && $callback($rtn);
+
                     $response[$map[strval($done['handle'])]] = $rtn;
                     curl_multi_remove_handle($chs, $done['handle']);
                     curl_close($done['handle']);
+
                     //如果仍然有未处理完毕的句柄，那么就select
                     if ($active > 0) {
                         curl_multi_select($chs, 0.5); //此处会导致阻塞大概0.5秒。
@@ -102,7 +107,7 @@ class getBaidu
     }
 
     //处理函数可自己写
-    function deal(&$data)
+    private function deal(&$data)
     {
         if (!empty($data['error']) || $data['info']['http_code'] != 200) {
             $data = 0;
@@ -113,7 +118,7 @@ class getBaidu
 
         unset($data['info'], $data['error'], $data['result']);
 
-        if (strpos($content, '抱歉，没有找到与')) {
+        if (strpos($content, '抱歉，没有找到')) {
             $data = 0;
             return;
         }
@@ -136,6 +141,6 @@ $urls = array(
     '34' => "hhttp://www.leshan.cn/hyzx/jkxx/4160562511.html "
 );
 
-$getBaidu = new getBaidu($urls);
+$getBaidu = new GetBaidu($urls);
 $getData = $getBaidu->getData();
 print_r($getData);

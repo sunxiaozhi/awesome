@@ -6,7 +6,7 @@ error_reporting(E_ALL | E_STRICT);
 echo '<pre>';
 
 $urls = array(
-    '5' => "http://hfz.zhong5.cn/sznk_wk/zc/2839.html",
+    '5' => "http://www.lanecn.com/article/main/aid-101",
     '2' => "http://www.leshan.cn/hyzx/jkxx/3986723898.html",
     '3' => "http://www.leshan.cn/hyzx/jkxx/3986724857.html",
     '1' => "http://www.zyol.gz.cn/jkzx/jkxx/4159811671.html",
@@ -33,7 +33,9 @@ array_walk($urls, create_function('&$v,$k,$baidu', '$v = str_replace("{url}", ur
 function curl_multi($urls = array(), $head_req = null, $callback = null)
 {
     $response = array();
-    if (empty($urls)) return $response;
+    if (empty($urls)) {
+        return $response;
+    }
     $chs = curl_multi_init();
 
     $options = array(
@@ -97,5 +99,6 @@ function deal(&$data)
 }
 
 $result = curl_multi($urls, null, 'deal');
+
 print_r($result);
 

@@ -179,3 +179,10 @@ grant all privileges on dbname.name.* to username@localhost identified by 'passw
 // 刷新权限信息
 FLUSH PRIVILEGES;
 ```
+
+### mysql如何开启远程连接
+
+```
+GRANT ALL PRIVILEGES ON . TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+flush privileges;
+```

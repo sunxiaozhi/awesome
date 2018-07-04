@@ -16,5 +16,5 @@ ntpdate pool.ntp.org
 
 ## Centos7下安装netstat
 ```bash
-yum install net-tools
+yum -y install net-tools
 ```

@@ -18,7 +18,7 @@
  
 ## 1、运行、停止、禁用firewalld
 
-启动：# systemctl start  firewalld
+启动：# systemctl start firewalld
 
 查看状态：# systemctl status firewalld 或者 firewall-cmd --state
 

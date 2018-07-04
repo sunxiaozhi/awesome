@@ -1,4 +1,4 @@
-一、 抽象类abstract class
+### 一、 抽象类abstract class
 
 1 ．抽象类是指在 class 前加了 abstract 关键字且存在抽象方法（在类方法 function 关键字前加了 abstract 关键字）的类。
 
@@ -60,7 +60,7 @@ Fatal error: Class B contains 1 abstract method and must therefore be declared a
 
 (3)如果 A 中 abstract_func() 声明为 private ，嘿嘿，不能定义为 private 哦！（ Fatal error : Abstract function A::abstract_func() cannot be declared private ）
 
-二、 接口interface
+### 二、 接口interface
 
 1 ．抽象类提供了具体实现的标准，而接口则是纯粹的模版。接口只定义功能，而不包含实现的内容。接口用关键字 interface 来声明。
 
@@ -150,7 +150,7 @@ class F implements iC
 }  
 ``` 
 
-三、 抽象类和接口的异同
+### 三、 抽象类和接口的异同
 
 1. 相同点：
 

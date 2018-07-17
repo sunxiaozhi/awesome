@@ -1,1 +1,2 @@
-# awesome
+# Mysql
+[Mysql的安装]()

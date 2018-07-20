@@ -111,7 +111,7 @@ firewall-cmd --reload
 
 配置192.168.20.65可以通过root:123456访问数据库
 
-GRANT ALL PRIVILEGES ON *.* to 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* to 'root'@'192.168.20.65' IDENTIFIED BY '123456' WITH GRANT OPTION;
 
 从mysql数据库中的授权表重新载入权限
 

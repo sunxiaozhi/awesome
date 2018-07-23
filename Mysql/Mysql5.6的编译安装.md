@@ -4,10 +4,13 @@ mkdir /home/soft/
 cd /home/soft/
 ```
 
-卸载mariadb
+卸载Centos7自带的mariadb
+
+```bash
 yum -y remove maria*
 
 rm /etc/my.cnf
+```
 
 下载mysql5.6的源码包
 ```bash
@@ -105,14 +108,21 @@ source /etc/profile
 mysql_secure_installation
 ```
 
+开启3306端口
+```bash
 firewall-cmd --permanent --add-port=3306/tcp
 
 firewall-cmd --reload
+```
 
 配置192.168.20.65可以通过root:123456访问数据库
 
+```bash
 GRANT ALL PRIVILEGES ON *.* to 'root'@'192.168.20.65' IDENTIFIED BY '123456' WITH GRANT OPTION;
+```
 
 从mysql数据库中的授权表重新载入权限
 
+```bash
 flush privileges;
+```

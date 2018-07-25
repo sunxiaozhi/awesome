@@ -1,7 +1,6 @@
 ## 常用sql语句整理：mysql
 
 1. 增
-
 - 增加一张表
 ```
 CREATE TABLE `table_name`(
@@ -47,7 +46,6 @@ AFTER `column_name`;
   ```
 
 2. 删
-
 - 逐行删除
 ```
 DELETE FORM `table_name`
@@ -77,7 +75,6 @@ DROP INDEX your_index_name(your_column_name);
 ```
 
 3. 改
-
 - 变更数据
 ```
 UPDATE `table_name`
@@ -102,7 +99,6 @@ WHERE a.id = b.a_id...;
 ```
 
 4. 查
-
 - 普通查询
 ```
 SELECT `column_name_one`, `column_name_two`
@@ -153,8 +149,6 @@ SELECT *
 FROM `destination_table_name`;
 ```
 
----
-
 ### 附录：mysql常用命令
 - 登陆： mysql -h host -u username -p
 - 列出数据库：SHOW DATABESES;
@@ -185,4 +179,21 @@ FLUSH PRIVILEGES;
 ```
 GRANT ALL PRIVILEGES ON . TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
 flush privileges;
+```
+
+### ORDER BY排序
+
+f1用升序，f2降序，sql该这样写
+```
+ORDER BY f1, f2 DESC
+```
+
+也可以这样写，更清楚：
+```
+ORDER BY f1 ASC, f2 DESC
+```
+
+如果都用降序，必须用两个desc
+```
+ORDER BY f1 DESC, f2 DESC
 ```

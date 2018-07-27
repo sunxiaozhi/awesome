@@ -90,5 +90,5 @@ read_only=1
 ```
 systemctl restart mysqld.service
 
-change master to master_host='192.168.20.65', master_user='repl', master_password='123456', master_port=3306, master_log_file='mysql_bin.000012', master_log_pos=422, master_connect_retry=30;
+change master to master_host='192.168.0.%', master_user='repl', master_password='123456', master_port=3306, master_log_file='mysql_bin.000012', master_log_pos=422, master_connect_retry=30;
 ```

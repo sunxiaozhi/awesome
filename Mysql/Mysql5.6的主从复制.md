@@ -61,7 +61,6 @@ mysql>grant replication slave,replication client on *.* to 'repl'@'192.168.20.66
 mysql>flush privileges;
 ```
 
-<<<<<<< HEAD
 查看position号，记下position号（从机上需要用到这个position号和现在的日志文件)
 ```
 mysql>show master status\G;
@@ -166,7 +165,6 @@ mysql>show processlist\G;
 
 ## 主从数据复制同步测试
 
-<<<<<<< HEAD
 在Master中的witcms库上变更数据的同步测试；
 ```
 mysql>INSERT INTO `testuser`(`usercode`,`username`) VALUES (`1`, '同步测试 1'),(  `2`,'同步测试 2');
@@ -192,10 +190,5 @@ mysql>reset slave;
 进入mysql的data目录，打开auto.cnf文件，里面记录了数据库的uuid，每个库的uuid应该是不一样的。
 ```
 server-uuid=6dcee5be-8cdb-11e2-9408-90e2ba2e2ea6
-=======
-change master to master_host='192.168.20.65', master_user='repl', master_password='123456', master_port=3306, master_log_file='mysql-bin.000001', master_log_pos=422, master_connect_retry=30;
-
-show slave status\G;
->>>>>>> b405dc2865ed8a9314eeb760eac72495d6792cac
 ```
 解决办法，按照这个16进制格式，随便改下，重启mysql即可。

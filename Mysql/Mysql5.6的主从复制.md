@@ -4,20 +4,20 @@ MySQL 版本：mysql-5.6.40.tar.gz
 从节点 IP：192.168.20.66        主机名：slave
 
 #### MySQL 主从复制（也称 A/B 复制）的原理
-* Master 将数据改变记录到二进制日志(binary  log)中，也就是配置文件 log-bin 指定的文件，这些记录叫做二进制日志事件(binary  log  events)；
-* Slave 通过 I/O 线程读取 Master 中的 binary  log  events 并写入到它的 中继日志(relay  log)；
-* Slave 重做中继日志中的事件，把中继日志中的事件信息一条一条的在 本地执行一次，完成数据在本地的存储，从而实现将改变反映到它自己的 数据(数据重放)。
+* Master将数据改变记录到二进制日志(binary log)中，也就是配置文件 log-bin 指定的文件，这些记录叫做二进制日志事件(binary log events)；
+* Slave通过 I/O 线程读取 Master 中的 binary log events并写入到它的中继日志(relay log)；
+* Slave重做中继日志中的事件，把中继日志中的事件信息一条一条的在本地执行一次，完成数据在本地的存储，从而实现将改变反映到它自己的数据(数据重放)。
 
 #### 主从配置需要注意的点
-* 主从服务器操作系统版本和位数一致；主从服务器的 hostname 不要一致。
-* Master 和 Slave 数据库的版本要一致；
-* Master 和 Slave 数据库中的数据要一致；
-* Master 开启二进制日志，Master 和 Slave 的 server_id 在局域网内必 须唯一；
-* Master 和 Slave 都创建数据库witcms，表testuser；
+* 主从服务器操作系统版本和位数一致；主从服务器的hostname不要一致。
+* Master和Slave数据库的版本要一致；
+* Master和Slave数据库中的数据要一致；
+* Master开启二进制日志，Master和Slave的server_id在局域网内必须唯一；
+* Master和Slave都创建数据库witcms；
 
 ## Master的配置
 
-Master（192.168.20.65）和 Slave（192.168.20.66） 注意：两台数据库服务器的的 selinux 都要 disable（永久关闭 selinux，请 修改/etc/selinux/config，将 SELINUX 改为 disabled）
+Master（192.168.20.65）和 Slave（192.168.20.66）注意：两台数据库服务器的的selinux都要disable（永久关闭 selinux，请 修改/etc/selinux/config，将SELINUX改为disabled）
 
 修改Master的配置文件
 
@@ -32,7 +32,7 @@ vi  /etc/my.cnf
 # 复制过滤：不需要备份的数据库，不输出（mysql 库一般不同步）
  binlog-ignore-db=mysql
 # 开启二进制日志功能，可以随便取，最好有含义
- log-bin=edu-mysql-bin
+ log-bin=mysql-bin
 # 为每个 session 分配的内存，在事务过程中用来存储二进制日志的缓存
  binlog_cache_size=1M
 # 主从复制的格式（mixed,statement,row，默认格式是 statement）
@@ -61,9 +61,11 @@ mysql>grant replication slave,replication client on *.* to 'repl'@'192.168.20.66
 mysql>flush privileges;
 ```
 
+<<<<<<< HEAD
 查看position号，记下position号（从机上需要用到这个position号和现在的日志文件)
 ```
 mysql>show master status\G;
+flush privileges;
 ```
 
 ## Slave的配置
@@ -75,13 +77,13 @@ vi  /etc/my.cnf
 
 ## 在 [mysqld] 中增加以下配置项
 # 设置 server_id，一般设置为 IP
-server_id=59
+server_id=66
 # 复制过滤：需要备份的数据库，输出 binlog
 binlog-do-db=witcms
 #复制过滤：不需要备份的数据库，不输出（mysql 库一般不同步）
 binlog-ignore-db=mysql
 # 开启二进制日志，以备 Slave 作为其它 Slave 的 Master 时使用
-log-bin=edu-mysql-slave1-bin
+log-bin=mysql-bin
 # 为每个 session 分配的内存，在事务过程中用来存储二进制日志的缓存
 binlog_cache_size=1M
 # 主从复制的格式（mixed,statement,row，默认格式是 statement）
@@ -164,6 +166,7 @@ mysql>show processlist\G;
 
 ## 主从数据复制同步测试
 
+<<<<<<< HEAD
 在Master中的witcms库上变更数据的同步测试；
 ```
 mysql>INSERT INTO `testuser`(`usercode`,`username`) VALUES (`1`, '同步测试 1'),(  `2`,'同步测试 2');
@@ -189,5 +192,10 @@ mysql>reset slave;
 进入mysql的data目录，打开auto.cnf文件，里面记录了数据库的uuid，每个库的uuid应该是不一样的。
 ```
 server-uuid=6dcee5be-8cdb-11e2-9408-90e2ba2e2ea6
+=======
+change master to master_host='192.168.20.65', master_user='repl', master_password='123456', master_port=3306, master_log_file='mysql-bin.000001', master_log_pos=422, master_connect_retry=30;
+
+show slave status\G;
+>>>>>>> b405dc2865ed8a9314eeb760eac72495d6792cac
 ```
 解决办法，按照这个16进制格式，随便改下，重启mysql即可。

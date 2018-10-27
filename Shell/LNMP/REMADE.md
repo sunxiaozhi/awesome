@@ -1,0 +1,9 @@
+目录介绍：
+LNMP
+-config
+-sh
+--mysql.sh
+--php.sh
+--nginx.sh
+--check.sh
+-install.sh

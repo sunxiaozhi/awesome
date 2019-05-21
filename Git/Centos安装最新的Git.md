@@ -20,7 +20,7 @@ yum remove git
 
 4、下载新版的 Git 源码包
 ```bash
-wget https://github.com/git/git/archive/v2.16.3.tar.gz
+wget https://github.com/git/git/archive/v2.21.0.tar.gz
 ```
 
 也可以离线下载，然后传到 CentOS 系统中指定的目录下。
@@ -28,7 +28,7 @@ wget https://github.com/git/git/archive/v2.16.3.tar.gz
 5、解压到指定目录
 
 ```bash
-tar -xzvf v2.16.3.tar.gz
+tar -xzvf v2.21.0.tar.gz
 ```
 
 6、安装 Git
@@ -36,7 +36,7 @@ tar -xzvf v2.16.3.tar.gz
 分别执行以下命令进行编译安装，编译过程可能比较漫长，请耐心等待完成。
 
 ```bash
-cd git-2.16.3
+cd git-2.21.0
 make prefix=/usr/local/git all
 make prefix=/usr/local/git install
 ```

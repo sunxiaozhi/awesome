@@ -107,7 +107,7 @@ systemctl restart mysqld.service
 
 #### 设置从Master拉取bin-log日志(Master的IP、端口、同步用户、密码、position 号、读取哪个日志文件)
 ```
-mysql>change master to master_host='192.168.0.%', master_user='repl', master_password='123456', master_port=3306, master_log_file='mysql_bin.000012', master_log_pos=422, master_connect_retry=30;
+mysql>change master to master_host='192.168.20.65', master_user='repl', master_password='123456', master_port=3306, master_log_file='mysql_bin.000012', master_log_pos=422, master_connect_retry=30;
 ```
 
 ```

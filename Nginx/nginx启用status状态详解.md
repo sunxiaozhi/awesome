@@ -32,9 +32,10 @@ location /nginx_status{
 
 修改配置文件后，先检查配置文件语法是否正确，正确的话重启。
 
+```bash
 /usr/local/nginx/sbin/nginx -t
 /usr/local/nginx/sbin/nginx -s reload
-
+```
 
 5）在浏览器中输入 "域名/nginx_status" 就会显示nginx上次启动以来工作状态的统计的结果。
 

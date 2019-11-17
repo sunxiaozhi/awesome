@@ -1,11 +1,10 @@
-## 常用sql语句整理：mysql
-
-1. 增
+### SQL常用语句
+#### 增
 - 增加一张表
 ```
 CREATE TABLE `table_name`(
   ...
-  )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
 - 增加记录
@@ -26,30 +25,25 @@ AFTER `column_name`;
 - 增加索引
   + 主键
   ```
-  ALTER TABLE `your_table_name`
-  ADD PRIMARY KEY your_index_name(your_column_name);
+  ALTER TABLE `your_table_name` ADD PRIMARY KEY your_index_name (your_column_name);
   ```
   + 唯一索引
   ```
-  ALTER TABLE `your_table_name`
-  ADD UNIQUE your_index_name(your_column_name);
+  ALTER TABLE `your_table_name` ADD UNIQUE your_index_name (your_column_name);
   ```
   + 普通索引
   ```
-  ALTER TABLE `your_table_name`
-  ADD INDEX your_index_name(your_column_name);
+  ALTER TABLE `your_table_name` ADD INDEX your_index_name (your_column_name);
   ```
   + 全文索引
   ```
-  ALTER TABLE `your_table_name`
-  ADD FULLTEXT your_index_name(your_column_name);
+  ALTER TABLE `your_table_name` ADD FULLTEXT your_index_name (your_column_name);
   ```
 
-2. 删
+#### 删
 - 逐行删除
 ```
-DELETE FORM `table_name`
-WHERE ...;
+DELETE FORM `table_name` WHERE ...;
 ```
 
 - 清空整张表
@@ -64,17 +58,15 @@ DROP TABLE `your_table_name`;
 
 - 删除字段
 ```
-ALTER TABLE `your_table_name`
-DROP `column_name`;
+ALTER TABLE `your_table_name` DROP `column_name`;
 ```
 
 - 删除索引
 ```
-ALTER TABLE `your_table_name`
-DROP INDEX your_index_name(your_column_name);
+ALTER TABLE `your_table_name` DROP INDEX your_index_name (your_column_name);
 ```
 
-3. 改
+#### 改
 - 变更数据
 ```
 UPDATE `table_name`
@@ -98,11 +90,10 @@ SET a.column = b.anther_column
 WHERE a.id = b.a_id...;
 ```
 
-4. 查
+#### 查
 - 普通查询
 ```
-SELECT `column_name_one`, `column_name_two`
-FROM `table_name`;
+SELECT `column_name_one`, `column_name_two` FROM `table_name`;
 ```
 
 - 关联查询
@@ -133,23 +124,22 @@ AS b
 WHERE a.column_name = b.column_name...;
 ```
 
-5. 复制一张表结构
+#### 复制一张表结构
 ```
-CREATE TABLE `your_table_name`
-LIKE `destination_table_name`;
-```
-
-6. 完全复制一张表：表结构+全部数据
-```
-CREATE TABLE `your_table_name`
-LIKE `destination_table_name`;
-
-INSERT INTO `your_table_name`
-SELECT *
-FROM `destination_table_name`;
+CREATE TABLE `your_table_name` LIKE `destination_table_name`;
 ```
 
-### 附录：mysql常用命令
+#### 完全复制一张表：表结构+全部数据
+```
+CREATE TABLE `your_table_name` LIKE `destination_table_name`;
+
+INSERT INTO `your_table_name` SELECT
+	*
+FROM
+	`destination_table_name`;
+```
+
+### MySQL常用命令
 - 登陆： mysql -h host -u username -p
 - 列出数据库：SHOW DATABESES;
 - 列出表:SHOW TABLES;
@@ -160,7 +150,7 @@ FROM `destination_table_name`;
 - 查看慢日志：mysqldumpslow -s [c:按记录次数排序/t:时间/l:锁定时间/r:返回的记录数] -t [n:前n条数据] -g "正则"　/path
 - 新增用户： insert into `user`(`Host`, `User`, `authentication_string`) value('localhost', 'username', password('pwd'))
 
-### mysql 5.7 新增用户
+#### mysql 5.7 新增用户
 
 ```
 // 插入新用户
@@ -174,7 +164,7 @@ grant all privileges on dbname.name.* to username@localhost identified by 'passw
 FLUSH PRIVILEGES;
 ```
 
-### mysql如何开启远程连接
+#### mysql如何开启远程连接
 
 ```
 GRANT ALL PRIVILEGES ON . TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;

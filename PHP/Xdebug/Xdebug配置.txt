@@ -1,0 +1,21 @@
+;2019.11.22 新增
+[XDebug]
+xdebug.auto_trace = 1
+xdebug.trace_format = 0
+xdebug.trace_output_dir="D:\phpStudy\PHPTutorial\tmp\xdebug"
+xdebug.auto_options = 0
+
+xdebug.collect_params = 4
+xdebug.collect_return = 1
+xdebug.collect_vars = 1
+xdebug.collect_assignments = 1
+
+xdebug.profiler_append = 0
+xdebug.profiler_enable = 1
+xdebug.profiler_output_dir = "D:\phpStudy\PHPTutorial\tmp\xdebug"
+xdebug.profiler_output_name = "cache.out.%t-%s"
+
+xdebug.remote_enable =1
+xdebug.remote_handler = "dbgp"
+xdebug.remote_host = "127.0.0.1"
+zend_extension = D:\phpStudy\PHPTutorial\php\php-7.2.1-nts\ext\php_xdebug-2.7.0-7.2-vc15-nts.dll

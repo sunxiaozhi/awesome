@@ -3,7 +3,7 @@
 xdebug.auto_trace = 1
 xdebug.trace_format = 0
 xdebug.trace_output_dir="D:\phpStudy\PHPTutorial\tmp\xdebug"
-xdebug.auto_options = 0
+xdebug.trace_options = 0
 
 xdebug.collect_params = 4
 xdebug.collect_return = 1

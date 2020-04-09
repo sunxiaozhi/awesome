@@ -12,6 +12,7 @@ xdebug.collect_assignments = 1
 
 xdebug.profiler_append = 0
 xdebug.profiler_enable = 1
+xdebug.profiler_enable_trigger = 0
 xdebug.profiler_output_dir = "D:\phpStudy\PHPTutorial\tmp\xdebug"
 xdebug.profiler_output_name = "cache.out.%t-%s"
 

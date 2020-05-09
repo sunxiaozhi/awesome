@@ -1,0 +1,15 @@
+@startuml
+abstract class Operation
+
+Operation : abstract getValue()
+
+Operation <|-- OperationAdd : getValue()
+Operation <|-- OperationSubtract : getValue()
+Operation <|-- OperationMultiply : getValue()
+Operation <|-- OperationDivide : getValue()
+Operation <|-- OperationRemainder : getValue()
+
+class SimpleFactory {
+    {static} createObj()
+}
+@enduml

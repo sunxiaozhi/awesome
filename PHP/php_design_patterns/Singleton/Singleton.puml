@@ -1,0 +1,9 @@
+@startuml
+class Singleton {
+    {static} _instance
+    - __construct()
+    {static} getInstance()
+    - __clone()
+    - __wakeup()
+}
+@enduml

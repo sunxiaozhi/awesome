@@ -1,8 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
  * curl多线程查询百度收录情况
- * User: sunhuanzhi
+ * User: sunxiaozzhi
  * Date: 2018/5/8
  * Time: 10:48
  */

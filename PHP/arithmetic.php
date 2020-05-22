@@ -1,13 +1,19 @@
 <?php
 /**
- * Created by PhpStorm.
  * User: sunxiaozhi
  * Date: 2018/2/5
  * Time: 15:17
  */
 
 /****************************************基本数据结构算法****************************************/
-//二分查找（数组里查找某个元素）
+/**
+ * //二分查找（数组里查找某个元素）
+ * @param $array
+ * @param $low
+ * @param $high
+ * @param $k
+ * @return int
+ */
 function bin_sch($array, $low, $high, $k)
 {
     if ($low <= $high) {
@@ -122,7 +128,7 @@ function strcmp_realize($s1, $s2)
 }
 
 //查找字符串
-function strstr_realize($str, $substr)
+function str_realize($str, $substr)
 {
     $m = strlen($str);
     $n = strlen($substr);
@@ -169,7 +175,7 @@ function str_delete($str, $i, $j)
 }
 
 //复制字符串
-function strcpy($s1, $s2)
+function str_copy($s1, $s2)
 {
     if (strlen($s1) == NULL || !isset($s2)) return '';
     for ($i = 0; $i < strlen($s1); $i++) {

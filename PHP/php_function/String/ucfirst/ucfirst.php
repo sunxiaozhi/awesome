@@ -1,8 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- *
- * User: sunhuanzhi
+ * ucfirst的使用
+ * User: sunxiaozhi
  * Date: 2018/3/13
  * Time: 10:44
  */

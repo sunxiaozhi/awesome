@@ -18,7 +18,7 @@ tar -zxvf jdk压缩包
 
 ## 配置环境变量
 ```shell
-vim/etc/profile
+vim /etc/profile
 ```
 
 在profile文件最后添加
@@ -37,4 +37,13 @@ source /etc/profile
 ## 验证是否安装成功
 ```shell
 java -version
+```
+
+## 常见问题
+若source /etc/profile在重新登陆之后不起作用，添加如下配置：
+```shell
+sudo vi ~/.bashrc
+
+# 文件最后一行添加
+source /etc/profile
 ```

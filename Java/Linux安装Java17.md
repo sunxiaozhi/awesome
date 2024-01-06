@@ -23,7 +23,7 @@ vim /etc/profile
 
 在profile文件最后添加
 ```shell
-#jdk17
+# jdk17
 export JAVA_HOME=/usr/lib/jdk17/jdk解压包名
 export CLASSPATH=.:$JAVA_HOME/lib/
 export PATH=.:$JAVA_HOME/bin:$PATH

@@ -23,6 +23,11 @@ export PATH=${PATH}:${MAVEN_HOME}/bin
 source /etc/profile 
 ```
 
+## 验证是否安装成功
+```shell
+mvn -version
+```
+
 ## 常见问题
 若source /etc/profile在重新登陆之后不起作用，添加如下配置：
 ```shell

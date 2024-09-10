@@ -1,4 +1,4 @@
-#Linux安装maven
+# Linux安装maven
 
 ## 下载安装包与解压
 ```shell

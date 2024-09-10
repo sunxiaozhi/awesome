@@ -1,4 +1,7 @@
+# Centos安装最新版本Git
+
 1、查看 yum 源仓库的 Git 信息：
+
 ```bash
 yum info git
 ```
